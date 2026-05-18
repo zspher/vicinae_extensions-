@@ -1,4 +1,4 @@
-import { Action, ActionPanel, Icon, List } from "@vicinae/api";
+import { Action, ActionPanel, Icon, Keyboard, List } from "@vicinae/api";
 
 import { runGrimblast } from "./utils";
 
@@ -41,10 +41,16 @@ export default function SimpleList() {
               <Action
                 title="Take Screenshot"
                 onAction={() => runGrimblast(s.action)}
+                shortcut={
+                  Keyboard.Shortcut.Common.New as Keyboard.Shortcut.Common
+                }
               />
               <Action
                 title="Take Screenshot & Open Editor"
                 onAction={() => runGrimblast(s.action, true)}
+                shortcut={
+                  Keyboard.Shortcut.Common.Edit as Keyboard.Shortcut.Common
+                }
               />
             </ActionPanel>
           }
