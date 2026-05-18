@@ -1,12 +1,22 @@
 import { exec } from "node:child_process";
 import { promisify } from "node:util";
-import { closeMainWindow, showToast, Toast } from "@vicinae/api";
+import {
+  closeMainWindow,
+  getPreferenceValues,
+  showToast,
+  Toast,
+} from "@vicinae/api";
 
 export const execAsync = promisify(exec);
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-export async function runGrimblast(action: string): Promise<void> {
+const { editor } = getPreferenceValues();
+
+export async function runGrimblast(
+  action: string,
+  openEditor: boolean = false,
+): Promise<void> {
   try {
     const now = new Date();
     const time =
@@ -25,7 +35,10 @@ export async function runGrimblast(action: string): Promise<void> {
 
     await closeMainWindow();
     await sleep(200);
-    await execAsync(`grimblast copysave ${action} ${path}`);
+    await execAsync(
+      `grimblast ${openEditor ? "edit" : "copysave"} ${action} ${path} `,
+      { env: { ...process.env, GRIMBLAST_EDITOR: editor } },
+    );
   } catch (error) {
     console.error(error);
     showToast({

@@ -18,7 +18,16 @@
       "mode": "view"
     }
   ],
-  "preferences": [],
+  "preferences": [
+    {
+      "name": "editor",
+      "title": "Editor",
+      "description": "The editor used to annotate screenshots",
+      "required": true,
+      "type": "textfield",
+      "default": "gimp"
+    }
+  ],
   "scripts": {
     "build": "vici build",
     "dev": "vici develop",

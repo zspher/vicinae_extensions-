@@ -39,8 +39,12 @@ export default function SimpleList() {
           actions={
             <ActionPanel>
               <Action
-                title="screenshot"
+                title="Take Screenshot"
                 onAction={() => runGrimblast(s.action)}
+              />
+              <Action
+                title="Take Screenshot & Open Editor"
+                onAction={() => runGrimblast(s.action, true)}
               />
             </ActionPanel>
           }
